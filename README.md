@@ -4,6 +4,8 @@
 
 1. [canvas刮刮卡](pages/ScratchCard.html)
 
+2. [canvas烟花](pages/Fireworks.html)
+
    
 
    
