@@ -6,9 +6,10 @@
 
 2. [canvas烟花](pages/Fireworks.html)
 
-   
+   ![fireworks](./imgs/fireworks.png)
 
    
 
-   
+3. [鼠标滑动选中](pages/ScratchCard.js)
 
+![fireworks](./imgs/select.png)
