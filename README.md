@@ -10,6 +10,6 @@
 
    
 
-3. [鼠标滑动选中](pages/ScratchCard.js)
+3. [鼠标滑动选中](pages/ScratchCard.jsx)
 
 ![fireworks](./imgs/select.png)
