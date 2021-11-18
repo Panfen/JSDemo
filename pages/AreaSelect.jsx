@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Modal } from 'antd';
-import './index.scss';
+import './AreaSelect.scss';
 
 export default () => {
 
@@ -15,32 +15,32 @@ export default () => {
 		if (visible) {
 			setTimeout(() => {
 				document.getElementById('wrap')?.addEventListener('mousedown', handleStart);
-		    document.getElementById('wrap')?.addEventListener('mousemove', handleMove);
-		    document.getElementById('wrap')?.addEventListener('mouseup', handleStop);
+				document.getElementById('wrap')?.addEventListener('mousemove', handleMove);
+				document.getElementById('wrap')?.addEventListener('mouseup', handleStop);
 			}, 500);
-	  }
-    return () => {
-      document.getElementById('wrap')?.removeEventListener('mousedown', handleStart);
-      document.getElementById('wrap')?.removeEventListener('mousemove', handleMove);
-      document.getElementById('wrap')?.removeEventListener('mouseup', handleStop);
-    };
-  }, [visible]);
+		}
+		return () => {
+			document.getElementById('wrap')?.removeEventListener('mousedown', handleStart);
+			document.getElementById('wrap')?.removeEventListener('mousemove', handleMove);
+			document.getElementById('wrap')?.removeEventListener('mouseup', handleStop);
+		};
+	}, [visible]);
 
-  const handleStart = (e) => {
-  	e.preventDefault();
-  	startPoint = e;
-  	calcArea(e, e);
-  }
+	const handleStart = (e) => {
+		e.preventDefault();
+		startPoint = e;
+		calcArea(e, e);
+	}
 
-  const handleMove = (e) => {
-  	e.preventDefault();
-  	if (startPoint) {
-  		calcArea(startPoint, e);
-  	}
-  }
+	const handleMove = (e) => {
+		e.preventDefault();
+		if (startPoint) {
+			calcArea(startPoint, e);
+		}
+	}
 
-  const calcArea = (start, end) => {
-  	let newActiveIndex = []
+	const calcArea = (start, end) => {
+		let newActiveIndex = []
 		let x1 = calcTarget(start.offsetX, 80);
 		let x2 = calcTarget(end.offsetX, 80);
 		let y1 = calcTarget(start.offsetY, 40);
@@ -57,44 +57,44 @@ export default () => {
 			}
 		}
 		setActiveIndex([...newActiveIndex]);
-  }
+	}
 
-  /**
-   * 获取目标块序号
-   */ 
-  const calcTarget = (offset, len) => {
-  	let target;
-  	// 假设最大范围8 * 8
-  	for (let i = 1; i <= 8; i++) {
-  		// 焦点在块上、焦点在空隙
-  		if (((len + 5) * i - len <= offset && offset <= (len + 5) * i) || ((len + 5) * (i - 1) < offset && offset < (len + 5) * i - len)) {
-  			target = i;
-  		}
-  	}
-  	return target;
-  }
+	/**
+	 * 获取目标块序号
+	 */ 
+	const calcTarget = (offset, len) => {
+		let target;
+		// 假设最大范围8 * 8
+		for (let i = 1; i <= 8; i++) {
+			// 焦点在块上、焦点在空隙
+			if (((len + 5) * i - len <= offset && offset <= (len + 5) * i) || ((len + 5) * (i - 1) < offset && offset < (len + 5) * i - len)) {
+				target = i;
+			}
+		}
+		return target;
+	}
 
-  /**
-   * 判断是否处于空隙
-   */
-  const isInBlank = (value, len) => {
-  	let isIn = false;
-  	for (let i = 0; i < 8; i++) {
-  		if ((len + 5) * i < value && value < (len + 5) * i + 5) {
-  			isIn = true;
-  		}
-  	}
-  	return isIn;
-  }
+	/**
+	 * 判断是否处于空隙
+	 */
+	const isInBlank = (value, len) => {
+		let isIn = false;
+		for (let i = 0; i < 8; i++) {
+			if ((len + 5) * i < value && value < (len + 5) * i + 5) {
+				isIn = true;
+			}
+		}
+		return isIn;
+	}
 
-  const handleStop = (e) => {
-  	e.preventDefault();
-  	startPoint = null;
-  }
+	const handleStop = (e) => {
+		e.preventDefault();
+		startPoint = null;
+	}
 
 	return (
 		<div className="select-modal">
-		<a onClick={() => setVisible(true)}>点击</a>
+			<a onClick={() => setVisible(true)}>点击</a>
 			<Modal
 				visible={visible}
 				closeable={true}
