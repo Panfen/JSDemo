@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Modal } from 'antd';
-import './AreaSelect.scss';
+import './index.scss';
 
 export default () => {
 
