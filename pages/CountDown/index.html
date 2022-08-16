@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CSS实现倒计时</title>
+	<style type="text/css">
+
+		count-down::after {
+			font-size: 60px;
+			display: inline-block;
+			--t: 5;
+			counter-reset: time var(--t);
+			content: counter(time, stop);
+			animation: count 5s steps(5) forwards, 
+			shark 1s .8s 5;
+		}
+
+		@property --t {
+			syntax: '<integer>';
+			inherits: false;
+			initial-value: 0;
+		}
+
+		@keyframes count {
+			to {
+				--t: 0;
+			}
+		}
+
+		@keyframes shark {
+			0% {
+				opacity: 1;
+				-webkit-transform: scale(1.0);
+			}
+			20% {
+				opacity: 0;
+				-webkit-transform: scale(0.4);
+			}
+
+			/*21% {
+				opacity: 0;
+				-webkit-transform: scale(5);
+			}*/
+
+			/*20% {
+        opacity: 0;
+        transform: translateY(100px);
+     	}
+
+     	21% {
+        opacity: 0;
+        transform: translateY(-100px);
+     	}*/
+		}
+
+		@counter-style stop {
+			system: cyclic;
+			symbols: 'Go~';
+			range: 0 0;
+		}
+	</style>
+</head>
+<body>
+	<count-down style="--t: 5"></count-down>
+	<a href="https://mp.weixin.qq.com/s/Wo0_UE_Sa-CP3UuX-y4cPA">参考</a>
+</body>
+</html>
