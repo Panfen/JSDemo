@@ -20,6 +20,6 @@
 
 ![countdown](./imgs/countdown.gif)
 
-1. [分形树](pages/FractalLines/index.html)
+7. [分形树](pages/FractalLines/index.html)
 
 ![tree](./imgs/tree.png)
