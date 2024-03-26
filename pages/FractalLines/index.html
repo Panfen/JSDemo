@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fractal Lines - 分形线条树</title>
+<style>
+  canvas {
+    display: block;
+    margin: auto;
+    background-color: #f0f0f0;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="fractalCanvas" width="800" height="600"></canvas>
+
+<script>
+const canvas = document.getElementById('fractalCanvas');
+const ctx = canvas.getContext('2d');
+
+const BROWN = [165, 42, 42]
+
+const GREEN = [0, 255, 0]
+
+function getChanneValueByDepth(color1, color2, depth, curDepth) {
+	return color1 - (color1 - color2) / depth * curDepth
+}
+
+function getColorByDepth(depth) {
+	return `rgb(${getChanneValueByDepth(BROWN[0], GREEN[0], 10, depth)},
+							${getChanneValueByDepth(GREEN[1], BROWN[1], 10, depth)},
+							${getChanneValueByDepth(BROWN[2], GREEN[2], 10, depth)},
+					)`
+}
+
+function drawFractalLine(startX, startY, length, angle, depth) {
+  if (depth === 0) {
+    return;
+  }
+  
+  // Convert angle to radians
+  const angleRad = angle * Math.PI / 180;
+  
+  // Calculate end position
+  const endX = startX + length * Math.cos(angleRad);
+  const endY = startY + length * Math.sin(angleRad);
+
+	// Set styles
+	ctx.lineWidth = depth;
+	ctx.strokeStyle = getColorByDepth(depth);
+  
+  // Draw line
+  ctx.beginPath();
+  ctx.moveTo(startX, startY);
+  ctx.lineTo(endX, endY);
+  ctx.stroke();
+  
+  // Recursively draw two more lines
+  const newLength = length * 0.7; // Length reduction factor for the next depth
+
+  // Sweep to the right
+  drawFractalLine(endX, endY, newLength, angle - 20, depth - 1);
+
+  // Sweep to the left
+  drawFractalLine(endX, endY, newLength, angle + 20, depth - 1);
+}
+
+// Draw the fractal
+drawFractalLine(400, 500, 100, -90, 10); // Start at bottom-center, going up
+</script>
+
+</body>
+</html>
